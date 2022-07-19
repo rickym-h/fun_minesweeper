@@ -1,0 +1,23 @@
+.outerDiv {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.unflaggedTile {
+    background-color: lightgrey;
+}
+
+#field {
+    background-color: black;
+
+    display: grid;
+    width: 90%;
+    height: 80%;
+
+}
+
