@@ -8,6 +8,22 @@ body {
     align-items: center;
 }
 
+header {
+    margin-top: 40px;
+    text-transform: none;
+    font-size:3em;
+    font-weight: normal;
+    font-style: italic; font-family: "Playfair Display","Bookman",serif;
+    color:#999;
+    word-spacing:1px;
+    letter-spacing: 0;
+}
+
+img {
+    height: 30px;
+    width: 30px;
+}
+
 .tile {
     background-color: lightgrey;
     display: flex;
@@ -35,6 +51,21 @@ body {
 }
 .clicked.mine {
     background-image: url("mine.png");
+}
+
+#key-info {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.key-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 

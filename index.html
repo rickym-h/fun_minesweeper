@@ -10,7 +10,7 @@
 
 
 <header>Welcome to my fun, fair, and enjoyable minesweeper game!</header>
-
+<br>
 <div id="options">
     <label for="size">Pick a size:</label>
     <select id="size" name="size">
@@ -20,12 +20,26 @@
     </select>
     <button id="new-game">New Game!</button>
 </div>
-
+<br>
 <div id="game-info"></div>
 
 <div id="field"></div>
 
-<div id="key-info"></div>
+<div id="key-info">
+    <div class="key-item">
+        <p>Flagged Tile</p>
+        <img src="flag.png" alt="Image of flagged tile">
+    </div>
+    <div class="key-item">
+        <p>Tile with Mine</p>
+        <img src="mine.png" alt="Image of tile with mine">
+    </div>
+    <div class="key-item">
+        <p>Flagged Tile with Mine</p>
+        <img src="flagged_mine.png" alt="Image of flagged tile with mine">
+    </div>
+</div>
+<br>
 
 </body>
 </html>
