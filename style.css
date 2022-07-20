@@ -68,6 +68,10 @@ img {
     align-items: center;
 }
 
+#options {
+    display: flex;
+    justify-content: space-around;
+}
 
 
 #field {

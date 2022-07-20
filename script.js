@@ -13,7 +13,6 @@ function newBoard(width, height, numOfMines) {
     // delete old nodes
     fieldDOM.innerHTML = '';
 
-    // todo style #field width and height based on the ratio of width/height
     let largestVMin = 80;
     if (width>height) {
         let ratio = height/width;
@@ -62,6 +61,12 @@ document.getElementById("new-game").addEventListener("click", function() {
             break;
         case "l":
             newBoard(32,16,99);
+            break;
+        case "c":
+            let w = document.getElementById("wRange").value;
+            let h = document.getElementById("hRange").value;
+            let m = document.getElementById("mRange").value;
+            newBoard(w,h,m);
             break;
         default:
             console.log("INVALID SIZE ENTERED: " + size)
@@ -122,3 +127,55 @@ function revealTile(e) {
     }
     console.log(listOfTiles)
 }
+
+function showSliders() {
+    document.getElementById("wRange").style.display = "block";
+    document.getElementById("hRange").style.display = "block";
+    document.getElementById("mRange").style.display = "block";
+    document.getElementById("wRangeDisplay").style.display = "block";
+    document.getElementById("hRangeDisplay").style.display = "block";
+    document.getElementById("mRangeDisplay").style.display = "block";
+    document.getElementById("wRangeDisplay").innerHTML = "Width: " + document.getElementById("wRange").value;
+    document.getElementById("hRangeDisplay").innerHTML = "Height: " + document.getElementById("hRange").value;
+    document.getElementById("mRangeDisplay").innerHTML = "Mines: " + document.getElementById("mRange").value;
+}
+
+function hideSliders() {
+    document.getElementById("wRange").style.display = "none";
+    document.getElementById("hRange").style.display = "none";
+    document.getElementById("mRange").style.display = "none";
+    document.getElementById("wRangeDisplay").style.display = "none";
+    document.getElementById("hRangeDisplay").style.display = "none";
+    document.getElementById("mRangeDisplay").style.display = "none";
+}
+
+hideSliders();
+document.getElementById("size").addEventListener("change", function (e) {
+    if (e.target.value === "c") {
+        showSliders();
+    } else {
+        hideSliders()
+    }
+})
+
+document.getElementById("wRange").oninput = function() {
+    document.getElementById("wRangeDisplay").innerHTML = "Width: " + this.value;
+}
+
+document.getElementById("hRange").oninput = function() {
+    document.getElementById("hRangeDisplay").innerHTML = "Height: " + this.value;
+}
+
+document.getElementById("mRange").oninput = function() {
+    document.getElementById("mRangeDisplay").innerHTML = "Mines: " + this.value;
+}
+
+document.getElementById("options").addEventListener("change", function(e) {
+    if ((e.target.id === "hRange") || (e.target.id === "wRange")) {
+        let w = document.getElementById("wRange").value;
+        let h = document.getElementById("hRange").value;
+        document.getElementById("mRange").max = Math.floor(w * h * 0.35)
+    }
+    document.getElementById("mRange").value = Math.min(document.getElementById("mRange").value, document.getElementById("mRange").max)
+    document.getElementById("mRangeDisplay").innerHTML = "Mines: " + document.getElementById("mRange").value;
+})
