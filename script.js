@@ -1,22 +1,12 @@
 let G_NUM_OF_MINES = 40;
 let G_NUM_FLAGGED_MINES = 0;
 let gameOver = false;
+let G_W = 9;
+let G_H = 9;
 newBoard(9,9,10);
 
-function newBoard(width, height, numOfMines) {
-
-    G_NUM_OF_MINES = numOfMines;
-    G_NUM_FLAGGED_MINES = 0
-
+function updateFieldDOMScale(width, height) {
     let fieldDOM = document.getElementById("field");
-
-    // delete old nodes
-    fieldDOM.innerHTML = '';
-
-    let largestVMin = 100;
-    let suffix = "%";
-    width = Number(width)
-    height = Number(height)
     let containerFieldDOM = document.getElementById("field-container");
     let containerW = containerFieldDOM.offsetWidth
     let containerH = containerFieldDOM.offsetHeight
@@ -35,6 +25,27 @@ function newBoard(width, height, numOfMines) {
         let ratio = width/height;
         fieldDOM.style.width = fieldDOM.offsetWidth * ratio + "px";
     }
+}
+
+function newBoard(width, height, numOfMines) {
+
+    G_NUM_OF_MINES = numOfMines;
+    G_NUM_FLAGGED_MINES = 0
+
+    let fieldDOM = document.getElementById("field");
+
+    // delete old nodes
+    fieldDOM.innerHTML = '';
+
+    let largestVMin = 100;
+    let suffix = "%";
+    width = Number(width)
+    height = Number(height)
+
+    G_W = width;
+    G_H = height;
+
+    updateFieldDOMScale(width, height);
     //console.log(fieldDOM.offsetWidth)
 
     //set styling taking into account the new nodes
@@ -193,3 +204,6 @@ document.getElementById("options").addEventListener("change", function(e) {
     document.getElementById("mRangeDisplay").innerHTML = "Mines: " + document.getElementById("mRange").value;
 })
 
+window.addEventListener('resize', function(event){
+    updateFieldDOMScale(G_W, G_H);
+});
