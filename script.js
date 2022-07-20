@@ -13,20 +13,29 @@ function newBoard(width, height, numOfMines) {
     // delete old nodes
     fieldDOM.innerHTML = '';
 
-    let largestVMin = 80;
+    let largestVMin = 100;
+    let suffix = "%";
     width = Number(width)
     height = Number(height)
-    if (width>height) {
+    let containerFieldDOM = document.getElementById("field-container");
+    let containerW = containerFieldDOM.offsetWidth
+    let containerH = containerFieldDOM.offsetHeight
+
+    if (containerW>containerH) {
+        fieldDOM.style.height = "100%";
+        fieldDOM.style.width = fieldDOM.offsetHeight + "px";
+    } else {
+        fieldDOM.style.width = "100%";
+        fieldDOM.style.height = fieldDOM.offsetWidth + "px";
+    }
+    if (width > height) {
         let ratio = height/width;
-        fieldDOM.style.width = largestVMin.toString() + "vmin";
-        console.log("width = " + largestVMin.toString() + "vmin")
-        fieldDOM.style.height = (ratio * largestVMin.toString())+"vmin";
-        console.log("height = " + (ratio * largestVMin.toString())+"vmin")
+        fieldDOM.style.height = fieldDOM.offsetHeight * ratio + "px";
     } else {
         let ratio = width/height;
-        fieldDOM.style.width = (ratio * largestVMin.toString())+"vmin";
-        fieldDOM.style.height = largestVMin.toString() + "vmin";
+        fieldDOM.style.width = fieldDOM.offsetWidth * ratio + "px";
     }
+    //console.log(fieldDOM.offsetWidth)
 
     //set styling taking into account the new nodes
     fieldDOM.style.gridTemplateRows = "repeat("+height.toString()+", 1fr)";
@@ -183,3 +192,4 @@ document.getElementById("options").addEventListener("change", function(e) {
     document.getElementById("mRange").value = Math.min(document.getElementById("mRange").value, document.getElementById("mRange").max)
     document.getElementById("mRangeDisplay").innerHTML = "Mines: " + document.getElementById("mRange").value;
 })
+
