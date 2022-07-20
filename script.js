@@ -42,6 +42,15 @@ function newBoard(width, height, numOfMines) {
         for (let w = 0; w < width; w++) {
             let tile = document.createElement("div");
             tile.classList.toggle("tile")
+
+            tile.addEventListener("click", revealTile)
+
+            tile.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                toggleTileFlag(e)
+                return false;
+            }, false);
+
             fieldDOM.appendChild(tile);
         }
     }
@@ -69,3 +78,11 @@ document.getElementById("new-game").addEventListener("click", function() {
             return;
     }
 })
+
+function toggleTileFlag(e) {
+    console.log("toggling flag")
+}
+
+function revealTile(e) {
+    console.log("revealing tile")
+}
