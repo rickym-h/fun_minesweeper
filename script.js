@@ -9,6 +9,9 @@ class Tile {
 }
 
 let G_NUM_OF_MINES = 40;
+let G_NUM_FLAGGED_MINES = 0;
+let gameOver = false;
+newBoard(9,9,1);
 
 function newBoard(width, height, numOfMines) {
     let field = Array.apply(null, Array(height)).map(x=>{
@@ -16,6 +19,7 @@ function newBoard(width, height, numOfMines) {
     })
 
     G_NUM_OF_MINES = numOfMines;
+    G_NUM_FLAGGED_MINES = 0
 
     let fieldDOM = document.getElementById("field");
 
@@ -59,7 +63,6 @@ function newBoard(width, height, numOfMines) {
 
 
 
-newBoard(13,42,99);
 
 
 document.getElementById("new-game").addEventListener("click", function() {
@@ -77,12 +80,30 @@ document.getElementById("new-game").addEventListener("click", function() {
             console.log("INVALID SIZE ENTERED: " + size)
             return;
     }
+    gameOver = false;
 })
 
 function toggleTileFlag(e) {
-    console.log("toggling flag")
+    if (gameOver) {
+        return;
+    }
+    e.target.classList.toggle("flagged");
 }
 
 function revealTile(e) {
-    console.log("revealing tile")
+    // get data representation of field
+    if (gameOver) {
+        return;
+    }
+    gameOver = true;
+    e.target.classList.toggle("clicked")
+    let listOfTiles = Array.from(document.getElementById("field").childNodes);
+
+    // put mines on tiles in order clicked tile > non-flagged tiles > flagged tiles
+    for (let tile of listOfTiles) {
+        console.log(tile + " " + tile.classList)
+        if (tile === e.target) {
+            console.log("FOUND")
+        }
+    }
 }
