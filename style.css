@@ -10,22 +10,13 @@ body {
 
 .tile {
     background-color: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-/*.tile:before{*/
-/*    content: ' ';*/
-/*    display: block;*/
-/*    width: 100%;*/
-/*    padding-top: 100%*/
-/*}*/
-
 
 #field {
     background-color: black;
-
-    /*width: 50%;*/
-    /*height: auto;*/
-    /*max-height: 100%;*/
-
     width: 80vmin;
     height: 80vmin;
 
