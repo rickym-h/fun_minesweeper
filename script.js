@@ -23,11 +23,15 @@ function newBoard(width, height, numOfMines) {
 
     //set styling taking into account the new nodes
     fieldDOM.style.gridTemplateRows = "repeat("+height.toString()+", 1fr)";
+    console.log("repeat("+height.toString()+", 1fr)");
     fieldDOM.style.gridTemplateColumns = "repeat("+width.toString()+", 1fr)";
+    console.log("repeat("+width.toString()+", 1fr)");
 
     for (let h = 0; h < height; h++) {
         for (let w = 0; w < width; w++) {
             let tile = document.createElement("div");
+
+            tile.classList.toggle("tile")
 
             fieldDOM.appendChild(tile);
 
