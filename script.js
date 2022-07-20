@@ -6,6 +6,7 @@ let G_H = 9;
 newBoard(9,9,10);
 
 function updateFieldDOMScale(width, height) {
+    document.getElementById("field-container").style.color="white";
     let fieldDOM = document.getElementById("field");
     let containerFieldDOM = document.getElementById("field-container");
     let containerW = containerFieldDOM.offsetWidth
@@ -108,6 +109,8 @@ function revealTile(e) {
     if (gameOver) {return;}
     gameOver = true;
     e.target.classList.toggle("clicked")
+    document.getElementById("field-container").style.color="red";
+
 
     // get data representation of field
     let listOfTiles = Array.from(document.getElementById("field").childNodes);
