@@ -13,15 +13,31 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.tile.mine {
+
 }
 
 .flagged {
-    background-color: red;
+    /*background-color: red;*/
+    background-image: url("flag.png");
+}
+.flagged.mine {
+
 }
 
 .clicked {
     background-color: green;
 }
+.clicked.mine {
+
+}
+
+
 
 #field {
     background-color: black;

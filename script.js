@@ -1,22 +1,9 @@
-class Tile {
-    constructor() {
-        this.flagged = false;
-    }
-
-    toggleFlag() {
-        this.flagged = !this.flagged;
-    }
-}
-
 let G_NUM_OF_MINES = 40;
 let G_NUM_FLAGGED_MINES = 0;
 let gameOver = false;
 newBoard(9,9,1);
 
 function newBoard(width, height, numOfMines) {
-    let field = Array.apply(null, Array(height)).map(x=>{
-        return Array.apply(null, Array(width)).map(function() {return new Tile()})
-    })
 
     G_NUM_OF_MINES = numOfMines;
     G_NUM_FLAGGED_MINES = 0
@@ -84,26 +71,33 @@ document.getElementById("new-game").addEventListener("click", function() {
 })
 
 function toggleTileFlag(e) {
-    if (gameOver) {
-        return;
-    }
+    if (gameOver) {return;}
     e.target.classList.toggle("flagged");
 }
 
 function revealTile(e) {
-    // get data representation of field
-    if (gameOver) {
-        return;
-    }
+    if (gameOver) {return;}
     gameOver = true;
     e.target.classList.toggle("clicked")
+
+    // get data representation of field
     let listOfTiles = Array.from(document.getElementById("field").childNodes);
 
     // put mines on tiles in order clicked tile > non-flagged tiles > flagged tiles
-    for (let tile of listOfTiles) {
-        console.log(tile + " " + tile.classList)
-        if (tile === e.target) {
-            console.log("FOUND")
+    listOfTiles.sort(function(a, b) {
+        let getPriority = function(n) {
+            if (n.classList.contains("clicked")) {
+                return 3;
+            } else if (!n.classList.contains("flagged")) {
+                return 2;
+            } else {
+                return 1;
+            }
         }
+        return (getPriority(b) - getPriority(a));
+    })
+
+    for (let i = 0; i < G_NUM_OF_MINES; i++) {
+        listOfTiles[i].classList.toggle("mine");
     }
 }
