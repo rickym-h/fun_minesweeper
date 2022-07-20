@@ -17,8 +17,6 @@ body {
 
 #field {
     background-color: black;
-    width: 80vmin;
-    height: 80vmin;
 
     display: grid;
     grid-gap: 1px;

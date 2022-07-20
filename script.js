@@ -8,13 +8,14 @@ class Tile {
     }
 }
 
-let numOfMines = 40;
+let G_NUM_OF_MINES = 40;
 
 function newBoard(width, height, numOfMines) {
     let field = Array.apply(null, Array(height)).map(x=>{
         return Array.apply(null, Array(width)).map(function() {return new Tile()})
     })
 
+    G_NUM_OF_MINES = numOfMines;
 
     let fieldDOM = document.getElementById("field");
 
@@ -22,6 +23,16 @@ function newBoard(width, height, numOfMines) {
     fieldDOM.innerHTML = '';
 
     // todo style #field width and height based on the ratio of width/height
+    let largestVMin = 80;
+    if (width>height) {
+        let ratio = height/width;
+        fieldDOM.style.width = largestVMin.toString() + "vmin";
+        fieldDOM.style.height = (ratio * largestVMin.toString())+"vmin";
+    } else {
+        let ratio = width/height;
+        fieldDOM.style.width = (ratio * largestVMin.toString())+"vmin";
+        fieldDOM.style.height = largestVMin.toString() + "vmin";
+    }
 
     //set styling taking into account the new nodes
     fieldDOM.style.gridTemplateRows = "repeat("+height.toString()+", 1fr)";
@@ -36,12 +47,14 @@ function newBoard(width, height, numOfMines) {
     }
 }
 
-newBoard(9,9,1);
+
+
+
+newBoard(13,42,99);
 
 
 document.getElementById("new-game").addEventListener("click", function() {
-    let size = document.getElementById("size").value
-    switch (size) {
+    switch (document.getElementById("size").value) {
         case "s":
             newBoard(9,9,1);
             break;
