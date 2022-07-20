@@ -14,10 +14,14 @@ function newBoard(width, height, numOfMines) {
     fieldDOM.innerHTML = '';
 
     let largestVMin = 80;
+    width = Number(width)
+    height = Number(height)
     if (width>height) {
         let ratio = height/width;
         fieldDOM.style.width = largestVMin.toString() + "vmin";
+        console.log("width = " + largestVMin.toString() + "vmin")
         fieldDOM.style.height = (ratio * largestVMin.toString())+"vmin";
+        console.log("height = " + (ratio * largestVMin.toString())+"vmin")
     } else {
         let ratio = width/height;
         fieldDOM.style.width = (ratio * largestVMin.toString())+"vmin";
