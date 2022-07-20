@@ -1,7 +1,7 @@
 let G_NUM_OF_MINES = 40;
 let G_NUM_FLAGGED_MINES = 0;
 let gameOver = false;
-newBoard(9,9,1);
+newBoard(9,9,10);
 
 function newBoard(width, height, numOfMines) {
 
@@ -55,7 +55,7 @@ function newBoard(width, height, numOfMines) {
 document.getElementById("new-game").addEventListener("click", function() {
     switch (document.getElementById("size").value) {
         case "s":
-            newBoard(9,9,1);
+            newBoard(9,9,10);
             break;
         case "m":
             newBoard(16,16,40);
@@ -82,14 +82,33 @@ function revealTile(e) {
 
     // get data representation of field
     let listOfTiles = Array.from(document.getElementById("field").childNodes);
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+
+        // While there remain elements to shuffle.
+        while (currentIndex != 0) {
+
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+
+        return array;
+    }
+    shuffle(listOfTiles)
+
 
     // put mines on tiles in order clicked tile > non-flagged tiles > flagged tiles
     listOfTiles.sort(function(a, b) {
         let getPriority = function(n) {
             if (n.classList.contains("clicked")) {
                 return 3;
-            } else if (!n.classList.contains("flagged")) {
-                return 2;
+            // } else if (!n.classList.contains("flagged")) {
+            //     return 2;
             } else {
                 return 1;
             }
@@ -99,5 +118,7 @@ function revealTile(e) {
 
     for (let i = 0; i < G_NUM_OF_MINES; i++) {
         listOfTiles[i].classList.toggle("mine");
+        console.log("foo")
     }
+    console.log(listOfTiles)
 }

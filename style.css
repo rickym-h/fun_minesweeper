@@ -19,7 +19,7 @@ body {
     background-repeat: no-repeat;
 }
 .tile.mine {
-
+    background-image: url("mine.png");
 }
 
 .flagged {
@@ -27,14 +27,14 @@ body {
     background-image: url("flag.png");
 }
 .flagged.mine {
-
+    background-image: url("flagged_mine.png");
 }
 
 .clicked {
-    background-color: green;
+    background-color: red;
 }
 .clicked.mine {
-
+    background-image: url("mine.png");
 }
 
 
